@@ -7,8 +7,13 @@ export default new Vuex.Store({
   state: {
     token: null,
     username: null,
-    albums: null,
+    songs: [],
     offset: 0,
+    filteredSongs: [],
+    sortOrder: {
+      direction: 'ASC',
+      name: 'artist'
+    }
   },
   mutations: {
     setToken(state, token) {
@@ -17,15 +22,18 @@ export default new Vuex.Store({
     setUsername(state, username) {
       state.username = username
     },
-    setAlbums(state, albums) {
-      state.albums = albums
-    },
     setAlbumOffset(state, offset) {
       state.offset = offset
     },
-    addAlbums(state, albums) {
-      state.albums.push(...albums)
+    setSongs(state, songs) {
+      state.songs = songs
     },
+    setFilteredSongs(state, filteredSongs) {
+      state.filteredSongs = filteredSongs
+    },
+    updateSortOrder(state, sortOrder) {
+      state.sortOrder = sortOrder
+    }
   },
   actions: {
 

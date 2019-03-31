@@ -2,21 +2,21 @@
   <div class="container">
     <user-info />
     <search />
-    <albums />
+    <songs />
   </div>
 </template>
 
 <script>
 import UserInfo from '@/components/UserInfo.vue'
 import Search from '@/components/Search.vue'
-import Albums from '@/components/Albums.vue'
+import Songs from '@/components/Songs.vue'
 
 export default {
   name: 'Container',
   components: {
     UserInfo,
     Search,
-    Albums,
+    Songs,
   }
 }
 </script>
