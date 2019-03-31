@@ -1,7 +1,7 @@
 <template>
   <div class='search'>
     <input @input='filter'/>
-  </div> 
+  </div>
 </template>
 
 <script>
@@ -11,17 +11,17 @@ export default {
   computed: {
     songs() {
       return this.$store.state.songs;
-    }
+    },
   },
 
   methods: {
     filter(e) {
-      let filteredSongs = this.songs.filter(song => {
-        return song.songTitle.includes(e.target.value)
-      });
-
-      this.$store.commit('setFilteredSongs', filteredSongs);
-      console.log(this.$store.state.filteredSongs);
+      this.$store.commit('updateFilterQuery', e.target.value);
+      this.$store.commit('setFilteredSongs', 
+        this.songs.filter(song => {
+          return song.songTitle.toLowerCase().includes(e.target.value.toLowerCase())
+        })
+      )
     }
   }
 }

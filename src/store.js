@@ -13,7 +13,8 @@ export default new Vuex.Store({
     sortOrder: {
       direction: 'ASC',
       name: 'artist'
-    }
+    },
+    query: ''
   },
   mutations: {
     setToken(state, token) {
@@ -33,6 +34,9 @@ export default new Vuex.Store({
     },
     updateSortOrder(state, sortOrder) {
       state.sortOrder = sortOrder
+    },
+    updateFilterQuery(state, query) {
+      state.query = query
     }
   },
   actions: {
