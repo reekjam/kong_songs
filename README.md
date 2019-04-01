@@ -4,6 +4,7 @@
 ```
 npm install
 ```
+Add your environment variables in `.env.development.local` at the root directory of this project.
 
 ### Compiles and hot-reloads for development
 ```
@@ -14,16 +15,3 @@ npm run serve
 ```
 npm run build
 ```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
