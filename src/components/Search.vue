@@ -1,6 +1,6 @@
 <template>
   <div class='search'>
-    <input @input='filter' v-model='query'/>
+    <input @input='filter' v-model='query' placeholder="Search" />
     <select @change='handleChange'>
       <option value='artist'>Artist</option>
       <option value='songTitle'>Song Title</option>
@@ -49,5 +49,9 @@ export default {
 <style>
   .search {
     margin-bottom: 20px;
+  }
+
+  input {
+    margin-right: 10px;
   }
 </style>

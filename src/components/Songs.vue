@@ -3,9 +3,15 @@
     <table>
       <thead>
         <tr>
-          <th v-on:click='sort' name='artist'>Artist</th>
-          <th v-on:click='sort' name='songTitle'>Song Title</th>
-          <th v-on:click='sort' name='albumTitle'>Album Title</th>
+          <th v-on:click='sort' name='artist'>
+            {{ showColumnWithSort('artist', 'Artist') }}
+          </th>
+          <th v-on:click='sort' name='songTitle'>
+            {{ showColumnWithSort('songTitle', 'Song Title') }}
+          </th>
+          <th v-on:click='sort' name='albumTitle'>
+            {{ showColumnWithSort('albumTitle', 'Album Title') }}
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -20,6 +26,8 @@
 </template>
 
 <script>
+import { ASC, DESC } from '@/constants';
+
 export default {
   name: 'Songs',
   props: ['songs'],
@@ -27,7 +35,7 @@ export default {
   computed: {
     sortOrder() {
       return this.$store.state.sortOrder;
-    }
+    },
   },
 
   methods: {
@@ -36,7 +44,7 @@ export default {
         let sortedSongs
         const name = e.target.getAttribute('name');
 
-        if (this.sortOrder.direction === 'ASC') {
+        if (this.sortOrder.direction === ASC) {
           sortedSongs = this.songs.sort((a, b) => {
             if (a[name].toLowerCase() < b[name].toLowerCase()) { return -1 };
             if (a[name].toLowerCase() > b[name].toLowerCase()) { return 1 };
@@ -44,7 +52,7 @@ export default {
           })
         }
 
-        if (this.sortOrder.direction === 'DESC') {
+        if (this.sortOrder.direction === DESC) {
           sortedSongs = this.songs.sort((a, b) => {
             if (a[name].toLowerCase() > b[name].toLowerCase()) { return -1 };
             if (a[name].toLowerCase() < b[name].toLowerCase()) { return 1 };
@@ -52,11 +60,18 @@ export default {
           })
         }
 
-        const direction = this.sortOrder.direction === 'ASC' ? 'DESC' : 'ASC';
+        const direction = this.sortOrder.direction === ASC ? DESC : ASC;
         
         this.$store.commit('updateSortOrder', { name, direction });
         this.$store.commit('setSongs', sortedSongs);
       }
+    },
+    showColumnWithSort(columnName, displayName) {
+      if (columnName === this.sortOrder.name) {
+        return `${displayName} (${this.sortOrder.direction})`
+      };
+
+      return displayName;
     }
   }
 }
@@ -68,6 +83,8 @@ export default {
   }
 
   th {
+    cursor: pointer;
     width: 30%;
+    padding: 20px 0;
   }
 </style>

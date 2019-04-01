@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <h1>KONG SONGS</h1>
     <container v-if='token' />
     <sign-in v-else />
   </div>
@@ -31,3 +32,11 @@ export default {
   }
 }
 </script>
+
+<style>
+  h1 {
+    font-family: 'Sarpanch';
+    margin-bottom: 50px;
+  }
+</style>
+

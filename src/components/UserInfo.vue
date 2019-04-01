@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>Sup, {{ username }}!</p>
+    <p>{{ username }}'s Trove of Tunes</p>
   </div>
 </template>
 

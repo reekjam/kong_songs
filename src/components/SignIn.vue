@@ -1,6 +1,5 @@
 <template>
   <div class="sign_in">
-    <h1>Sign In</h1>
     <a v-bind:href="authLink + '?client_id=' + clientId + '&redirect_uri=' + redirectURI + '&scope=' + scope + '&response_type=' + responseType">
       Log in with Spotify
     </a>

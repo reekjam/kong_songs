@@ -1,20 +1,23 @@
 <template>
   <div class="container">
-    <user-info />
-    <search />
-    <template v-if='query'>
-      <template v-if='filteredSongs.length > 0'>
-        <songs :songs=filteredSongs />
-      </template>
-      <template v-else>
-        <div>
-          No results.
-        </div>
-      </template>
-    </template>
-
+    <loader v-if='loading'/>
     <template v-else>
-      <songs :songs=songs />
+      <user-info />
+      <search />
+      <template v-if='query'>
+        <template v-if='filteredSongs.length > 0'>
+          <songs :songs=filteredSongs />
+        </template>
+        <template v-else>
+          <div>
+            No results.
+          </div>
+        </template>
+      </template>
+
+      <template v-else>
+        <songs :songs=songs />
+      </template>
     </template>
   </div>
 </template>
@@ -23,9 +26,10 @@
 import UserInfo from '@/components/UserInfo.vue'
 import Search from '@/components/Search.vue'
 import Songs from '@/components/Songs.vue'
+import Loader from '@/components/Loader.vue'
 
 import { getAlbums } from '@/helpers/spotify';
-import { albumLimit } from '@/constants';
+import { ALBUM_LIMIT } from '@/constants';
 
 export default {
   name: 'Container',
@@ -33,21 +37,24 @@ export default {
     UserInfo,
     Search,
     Songs,
+    Loader,
   },
 
   async beforeMount() {
-    let offset = 0;
     let songs = [];
 
-    let getAlbumsResponse = await getAlbums(this.$store.state.token, offset);
+    let getAlbumsResponse = await getAlbums(this.$store.state.token, this.offset);
     const { data: { total } } = getAlbumsResponse;
 
-    while (offset < total) {
-      let albumsResponse = await getAlbums(this.$store.state.token, offset);
-      let { data: { items } } = albumsResponse;
-      offset += albumLimit;
+    this.$store.commit('setTotalAlbums', total);
+    this.$store.commit('toggleLoader', true);
 
-      console.log(offset)
+    while (this.offset < total) {
+      let albumsResponse = await getAlbums(this.$store.state.token, this.offset);
+      let { data: { items } } = albumsResponse;
+      this.offset += ALBUM_LIMIT;
+
+      console.log(this.offset)
 
       items.forEach(item => {
         this.getAlbumInfo(item).forEach(song =>
@@ -57,6 +64,7 @@ export default {
     }
 
     this.$store.commit('setSongs', songs);
+    this.$store.commit('toggleLoader', false);
   },
 
   computed: {
@@ -68,6 +76,20 @@ export default {
     },
     query() {
       return this.$store.state.query;
+    },
+    loading() {
+      return this.$store.state.isLoading;
+    },
+    totalAlbums() {
+      return this.$store.state.totalAlbums;
+    },
+    offset: {
+      get() {
+        return this.$store.state.offset;
+      },
+      set(newValue) {
+        this.$store.commit('updateOffsetValue', newValue)
+      }
     }
   },
 

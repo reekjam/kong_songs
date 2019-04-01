@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import { ASC } from '@/constants';
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -11,11 +13,13 @@ export default new Vuex.Store({
     offset: 0,
     filteredSongs: [],
     sortOrder: {
-      direction: 'ASC',
+      direction: ASC,
       name: 'artist'
     },
     query: '',
     filterType: 'artist',
+    isLoading: false,
+    totalAlbums: 0,
   },
   mutations: {
     setToken(state, token) {
@@ -41,7 +45,16 @@ export default new Vuex.Store({
     },
     updateFilterType(state, filterType) {
       state.filterType = filterType
-    }
+    },
+    toggleLoader(state, value) {
+      state.isLoading = value
+    },
+    setTotalAlbums(state, value) {
+      state.totalAlbums = value
+    },
+    updateOffsetValue(state, value) {
+      state.offset = value
+    },
   },
   actions: {
 
