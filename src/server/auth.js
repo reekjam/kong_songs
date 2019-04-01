@@ -4,7 +4,7 @@ const clientSecret = process.env.CLIENT_SECRET
 const clientId = process.env.VUE_APP_CLIENT_ID
 const redirectUri = process.env.VUE_APP_REDIRECT_URI
 
-const auth = (req, res, next) => {
+const auth = (req, res) => {
   const code = req.query.code;
   const authOptions = {
     url: 'https://accounts.spotify.com/api/token',

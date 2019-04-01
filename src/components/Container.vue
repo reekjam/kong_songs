@@ -54,8 +54,6 @@ export default {
       let { data: { items } } = albumsResponse;
       this.offset += ALBUM_LIMIT;
 
-      console.log(this.offset)
-
       items.forEach(item => {
         this.getAlbumInfo(item).forEach(song =>
           songs.push(song)

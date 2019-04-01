@@ -46,16 +46,16 @@ export default {
 
         if (this.sortOrder.direction === ASC) {
           sortedSongs = this.songs.sort((a, b) => {
-            if (a[name].toLowerCase() < b[name].toLowerCase()) { return -1 };
-            if (a[name].toLowerCase() > b[name].toLowerCase()) { return 1 };
+            if (a[name].toLowerCase() < b[name].toLowerCase()) { return -1 }
+            if (a[name].toLowerCase() > b[name].toLowerCase()) { return 1 }
             return 0;
           })
         }
 
         if (this.sortOrder.direction === DESC) {
           sortedSongs = this.songs.sort((a, b) => {
-            if (a[name].toLowerCase() > b[name].toLowerCase()) { return -1 };
-            if (a[name].toLowerCase() < b[name].toLowerCase()) { return 1 };
+            if (a[name].toLowerCase() > b[name].toLowerCase()) { return -1 }
+            if (a[name].toLowerCase() < b[name].toLowerCase()) { return 1 }
             return 0;
           })
         }
@@ -69,7 +69,7 @@ export default {
     showColumnWithSort(columnName, displayName) {
       if (columnName === this.sortOrder.name) {
         return `${displayName} (${this.sortOrder.direction})`
-      };
+      }
 
       return displayName;
     }
