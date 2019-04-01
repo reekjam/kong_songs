@@ -14,7 +14,8 @@ export default new Vuex.Store({
       direction: 'ASC',
       name: 'artist'
     },
-    query: ''
+    query: '',
+    filterType: 'artist',
   },
   mutations: {
     setToken(state, token) {
@@ -37,6 +38,9 @@ export default new Vuex.Store({
     },
     updateFilterQuery(state, query) {
       state.query = query
+    },
+    updateFilterType(state, filterType) {
+      state.filterType = filterType
     }
   },
   actions: {

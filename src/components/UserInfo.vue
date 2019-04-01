@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>Sup, {{ username }}</p>
+    <p>Sup, {{ username }}!</p>
   </div>
 </template>
 

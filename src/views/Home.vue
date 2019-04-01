@@ -1,18 +1,20 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
     <container v-if='token' />
+    <sign-in v-else />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Container from '@/components/Container.vue'
+import Container from '@/components/Container.vue';
+import SignIn from '@/components/SignIn.vue';
 
 export default {
   name: 'home',
   components: {
     Container,
+    SignIn,
   },
 
   beforeMount() {
